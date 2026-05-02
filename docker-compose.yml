@@ -1,0 +1,27 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+  api:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    environment:
+      - PORT=3000
+      - REDIS_URL=redis://redis:6379
+      - OPENWEATHER_API_KEY=${OPENWEATHER_API_KEY}
+      - CACHE_TTL_SECONDS=${CACHE_TTL_SECONDS:-600}
+      - MAX_FORECAST_DAYS=${MAX_FORECAST_DAYS:-5}
+      - MOCK_MODE=${MOCK_MODE:-false}
+    depends_on:
+      - redis
+
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--save", "", "--appendonly", "no"]

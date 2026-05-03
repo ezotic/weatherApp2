@@ -2,6 +2,16 @@
 
 Weather app using HTML, Bootstrap, and JavaScript with a Node.js API proxy and Redis caching.
 
+## Screenshots
+
+**Search UI**
+
+![Weather App search UI](screenshot_20260503_142157.jpg)
+
+**Forecast Results**
+
+![Weather App forecast results](screenshot_20260503_142959.jpg)
+
 ## Features
 
 - Search by city or zip code.
